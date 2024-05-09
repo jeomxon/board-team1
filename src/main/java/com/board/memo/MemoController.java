@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
+
 import java.net.URI;
 
 @RequiredArgsConstructor
@@ -17,7 +20,7 @@ public class MemoController {
 
     @PostMapping
     public ResponseEntity<Void> create(
-            @Auth Long memberId,
+            Long memberId,
             @RequestBody MemoCreateRequest request
     ) {
         Long id = memoService.save(memberId,request.title(),request.content());
