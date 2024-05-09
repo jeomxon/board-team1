@@ -1,5 +1,6 @@
-package com.board.board;
+package com.board.post;
 
+import com.board.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,22 +24,35 @@ public class PostController {
 
     // 어렵다
 
+    private final UserRepository userRepository;
     private final PostService postService;
 
     @PostMapping
     public ResponseEntity<Void> createPost(
             Long id,
-            @RequestBody PostCreateRequest request) {
-        return ResponseEntity.created(URI.create("/posts" + )).build();
+            @RequestBody PostCreateRequest postCreateRequest) {
+        Long postId = postService.save(postCreateRequest.postId(),
+                postCreateRequest.title(),
+                postCreateRequest.content(),
+                postCreateRequest.userId()
+                );
+        return ResponseEntity.created(URI.create("/posts" + postId)).build();
     }
+
     @PutMapping("/{postId}")
-    public void updatePost(@PathVariable("postId") Long postId, @RequestBody ) {
-        postService.updatePost();
+    public void updatePost(@PathVariable("postId") Long postId,
+            @RequestBody PostUpdateRequest postUpdateRequest) {
+        postService.updatePost(postUpdateRequest.userId(),
+                postUpdateRequest.postId(),
+                postUpdateRequest.title(),
+                postUpdateRequest.content(),
+                postUpdateRequest.memberId(),
+                postUpdateRequest.createdDate());
     }
 
     @DeleteMapping("/{postId}")
-    public void delete(@PathVariable Long postId) {
-        postService.delete();
+    public void deletePost(Long userId, @PathVariable Long postId) {
+        postService.delete(userId, postId);
     }
 
     @GetMapping

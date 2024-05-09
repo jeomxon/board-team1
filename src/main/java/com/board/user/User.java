@@ -1,8 +1,10 @@
 package com.board.user;
 
 import com.board.common.UnAuthorizedException;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 
+@Entity
 @Getter
 public class User {
 
