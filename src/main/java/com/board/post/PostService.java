@@ -17,6 +17,7 @@ public class PostService {
 
     // 여기서부터 메서드 작성 ??
     // 해야 하는데 못 했습니다 ..
+    // 했습니다 ..
 
     public Long save(Long postId, String title, String content, Long userId) {
         // 유저 레포지토리에서 유저 찾고 ?

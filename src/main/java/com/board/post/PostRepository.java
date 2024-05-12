@@ -2,6 +2,7 @@ package com.board.post;
 
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,11 @@ public class PostRepository {
         posts.put(id++, post);
 
         return post;
+    }
+
+    // TODO: make 'post update method'
+    public void updatePost(Post post, Long postId, String title, String content, String memberId, LocalDate localDate) {
+        post.update(postId, title, content, memberId, localDate);
     }
 
     public void deletePost(Post post) {

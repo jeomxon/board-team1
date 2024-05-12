@@ -26,8 +26,7 @@ public class User {
     public void login(String password) {
         if (this.password.equals(password)) {
             return;
-        } else {
-            throw new UnAuthorizedException("비밀번호 불일치 ..!");
         }
+        throw new UnAuthorizedException("비밀번호 불일치 ..!");
     }
 }
