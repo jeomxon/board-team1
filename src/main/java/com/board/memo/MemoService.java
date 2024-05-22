@@ -22,4 +22,23 @@ public class MemoService {
         return memoRepository.save(memo)
                 .getId();
     }
+
+    public void update(Long userId, Long id, String title, String content){
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("회원 정보가 없습니다."));
+        Memo memo = memoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("게시글이 존재하지 않습니다."));
+        memo.validateMember(member);
+        memo.update(title, content);
+    }
+
+    public void delete(Long userId, Long id){
+        Member member = memberRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("회원 정보가 없습니다."));
+        Memo memo = memoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("게시글이 존재하지 않습니다."));
+        memo.validateMember(member);
+        memoRepository.delete(memo);
+
+    }
 }

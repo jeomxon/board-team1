@@ -2,12 +2,7 @@ package com.board.memo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
+import org.springframework.web.bind.annotation.*;
 
 
 import java.net.URI;
@@ -27,5 +22,22 @@ public class MemoController {
         return ResponseEntity.created(URI.create("/posts/" + id)).build();
 
     }
+    @PutMapping("/{id}")
+    public void update(
+            Long memberId,
+            Long id,
+            @RequestBody MemoCreateRequest request) {
+        memoService.update(memberId, id, request.title(), request.content());
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(
+            Long memberId,
+            Long id
+    ){
+        memoService.delete(memberId, id);
+
+    }
+
 
 }

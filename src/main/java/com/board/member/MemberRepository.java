@@ -27,6 +27,7 @@ public class MemberRepository {
 			.findAny();
 	}
 
+
 	public void clear() {
 		members.clear();
 	}

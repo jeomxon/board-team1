@@ -32,6 +32,10 @@ public class Memo {
         this.content = content;
         this.title = title;
     }
+    public void delete(){
+
+    }
+
 
     public void validateMember(Member member) {
         if (!this.userId.equals(member.getId())) {
