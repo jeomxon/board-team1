@@ -21,4 +21,7 @@ public class MemoRepository {
     public Optional<Memo> findById(Long id) {
         return Optional.ofNullable(memos.get(id));
     }
+
+    public void delete(Memo memo){ memos.remove(memo.getId());}
 }
+
